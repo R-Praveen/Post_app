@@ -14,6 +14,7 @@ class LoginRepository {
     required this.usersDao,
   });
 
+  //Fetching users details from database and storing in local
   Future fetchUsers() async {
     try {
       final List<User> users = [];
@@ -65,6 +66,8 @@ class LoginRepository {
 
   Future login(LoginModel loginModel) async {
     final users = await usersDao.getUsers();
+
+    //Checks email exists in the local database and throws exception if does not exist
     if (!checkEmailExists(users, loginModel)) {
       throw EmailDoesNotExistException();
     }
@@ -79,6 +82,9 @@ class LoginRepository {
     );
   }
 
+  /*Checking the email by converting to lowercase and if it matches 
+  then proceeding to check for passwor dvalidation
+  */
   bool checkEmailExists(List<User> users, LoginModel loginModel) {
     bool _isValid = false;
     for (final user in users) {
@@ -94,6 +100,12 @@ class LoginRepository {
     return _isValid;
   }
 
+  /*
+  Checking password is in correct format and if password is in correct format
+   checks for already save password matches with the one user entered 
+   and if database passaword is empty then updating the user password in database
+    for checking for future use
+    */
   bool validatePassword(User user, String newPassword) {
     bool _isValid = false;
     if (validatePasswordIsValid(newPassword)) {
@@ -110,12 +122,15 @@ class LoginRepository {
     return _isValid;
   }
 
+  //logging out the user from the app
   Future logOut() async {
     try {
       final user = await getLoggedInUser();
       await usersDao.logOutUser(
         user!.copyWith(isUserLoggedIn: false),
       );
+
+      //Clearing all user related tables from local after log out
       await AppDatabase.instance().clearUserRelatedTables();
     } catch (e) {
       debugPrint(e.toString());

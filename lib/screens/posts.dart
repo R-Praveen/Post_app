@@ -59,7 +59,9 @@ class _PostsState extends State<Posts> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, CreatePost.route);
+          Navigator.pushNamed(context, CreatePost.route).then((value) {
+            _bloc!.initDetails();
+          });
         },
         backgroundColor: AppColors.green,
         child: const Icon(

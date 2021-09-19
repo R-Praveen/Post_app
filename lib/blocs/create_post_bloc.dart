@@ -39,6 +39,11 @@ class CreatePostBloc {
     }
   }
 
+  /*Submitting the post after validation 
+  and incrementing the id of the last post existing by 100 since 
+  100 posts are there in API we are storing it above 100 
+  as ID to avoid conflicts*/
+
   Future submit() async {
     final titleValue = title.hasValue ? title.value : '';
     final postValue = post.hasValue ? post.value : '';
@@ -59,15 +64,16 @@ class CreatePostBloc {
       body: postValue,
     );
     try {
-      await repository.savePost(newPost).then((value) {
-        debugPrint('');
-      });
+      await repository.savePost(newPost);
       postAdded.add(true);
     } catch (e) {
       debugPrint(e.toString());
     }
   }
 
+  /*
+  closing all streams 
+  */
   void dispose() {
     title.close();
     post.close();

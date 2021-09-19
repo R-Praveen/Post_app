@@ -58,7 +58,7 @@ class LoginBloc {
       _isValid = false;
     } else if (!validatePasswordIsValid(value ?? '')) {
       passwordError.add(
-          "Please enter the password with 1 uppercase, 1 number, atleast 8 characters");
+          "Please enter the password with 1 uppercase,1 lowercase, 1 special character, 1 number, atleast 8 characters");
       _isValid = false;
     } else {
       passwordError.add('');
@@ -66,6 +66,8 @@ class LoginBloc {
     return _isValid;
   }
 
+  /*After validation of email password as per the regex we have submitting 
+  the details and storing in API */
   Future onClickContinue() async {
     try {
       bool _isValid = true;
