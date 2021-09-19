@@ -99,6 +99,7 @@ class _LoginState extends State<Login> {
                     BorderedTextField(
                       title: 'Password',
                       textStream: bloc?.password,
+                      maxLines: 1,
                       errorStream: bloc?.passwordError,
                       obscureText: true,
                       onTextChanged: (String value) =>
