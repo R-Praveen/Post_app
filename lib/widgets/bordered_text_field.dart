@@ -13,6 +13,7 @@ class BorderedTextField extends StatefulWidget {
     required this.title,
     this.textInputType = TextInputType.text,
     this.minLines = 1,
+    this.maxLines,
     this.textInputAction,
     this.inputFormatters,
     this.textAlign = TextAlign.start,
@@ -28,6 +29,7 @@ class BorderedTextField extends StatefulWidget {
   final void Function(String) onTextChanged;
   final TextInputType textInputType;
   final int minLines;
+  final int? maxLines;
   final TextAlign textAlign;
   final TextAlignVertical textAlignVertical;
   final TextInputAction? textInputAction;
@@ -88,6 +90,7 @@ class _BorderedTextFieldState extends State<BorderedTextField> {
               textAlign: widget.textAlign,
               textAlignVertical: widget.textAlignVertical,
               minLines: widget.minLines,
+              maxLines: widget.maxLines,
               enableInteractiveSelection: widget.enableSelection,
               enabled: widget.enabled,
               controller: _controller,

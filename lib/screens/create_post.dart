@@ -61,11 +61,12 @@ class _CreatePostState extends State<CreatePost> {
                     height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   BorderedTextField(
-                      textStream: bloc.post,
-                      errorStream: bloc.errPost,
-                      onTextChanged: (String value) =>
-                          bloc.onPostChanged(value),
-                      title: "Post"),
+                    textStream: bloc.post,
+                    maxLines: 4,
+                    errorStream: bloc.errPost,
+                    onTextChanged: (String value) => bloc.onPostChanged(value),
+                    title: "Post",
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                   ),
