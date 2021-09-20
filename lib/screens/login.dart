@@ -81,54 +81,56 @@ class _LoginState extends State<Login> {
                 padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width * 0.1,
                 ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.02,
-                    ),
-                    BorderedTextField(
-                      title: 'Email ID',
-                      textStream: bloc?.email,
-                      errorStream: bloc?.emailError,
-                      onTextChanged: (String value) =>
-                          bloc?.onEmailChanged(value),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.02,
-                    ),
-                    BorderedTextField(
-                      title: 'Password',
-                      textStream: bloc?.password,
-                      maxLines: 1,
-                      errorStream: bloc?.passwordError,
-                      obscureText: true,
-                      onTextChanged: (String value) =>
-                          bloc?.onPasswordChanged(value),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.05,
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: AppButton(
-                        child: const Text(
-                          "Continue",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontWeight: FontWeight.bold,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      BorderedTextField(
+                        title: 'Email ID',
+                        textStream: bloc?.email,
+                        errorStream: bloc?.emailError,
+                        onTextChanged: (String value) =>
+                            bloc?.onEmailChanged(value),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      BorderedTextField(
+                        title: 'Password',
+                        textStream: bloc?.password,
+                        maxLines: 1,
+                        errorStream: bloc?.passwordError,
+                        obscureText: true,
+                        onTextChanged: (String value) =>
+                            bloc?.onPasswordChanged(value),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.05,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: AppButton(
+                          child: const Text(
+                            "Continue",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          onTap: () async {
+                            await bloc?.onClickContinue();
+                          },
+                          color: AppColors.green,
+                          borderRadius: BorderRadius.circular(
+                            30,
                           ),
                         ),
-                        onTap: () async {
-                          await bloc?.onClickContinue();
-                        },
-                        color: AppColors.green,
-                        borderRadius: BorderRadius.circular(
-                          30,
-                        ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               );
             }
